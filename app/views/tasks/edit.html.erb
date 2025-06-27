@@ -1,0 +1,22 @@
+<%# Comment Input %>
+<h2 class="mt-10 text-center mb-5 font-bold text-3xl">Edit Task</h2>
+<%= form_with model: @task , url:user_task_path(@user, @task) ,  method:"put", class:"w-full  border-rounded flex flex-col relative px-5 py-5 flex justify-between gap-2" do |f| %>
+
+    <%= f.text_field :title, class:'w-full py-3 px-5 rounded-lg border border-gray-300 bg-white 
+        text-gray-900 placeholder-gray-400 text-lg font-normal leading-relaxed', placeholder:"Title", required: true %>
+
+        <%= f.text_field :description, class:'w-full py-3 px-5 rounded-lg border border-gray-300 bg-white 
+        text-gray-900 placeholder-gray-400 text-lg font-normal leading-relaxed', placeholder:"leave a comment here", required: true %> 
+    
+    <div class="flex items-center justify-center">
+        <%= f.select :status, options_for_select([['Done', 'done'], ['Pending', 'pending']], f.object.status), {}, 
+        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+    </div>
+
+
+    <div class="flex items-center justify-center">
+        <button class="py-2  w-100 px-2 mt-10 rounded-none bg-orange-600 text-white" type="submit" >
+        Edit <i class="ri-send-plane-2-line"></i>
+        </button>
+    </div>
+<%end%>

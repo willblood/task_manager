@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TaskManager</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" integrity="sha512-XcIsjKMcuVe0Ucj/xgIXQnytNwBttJbNjltBV18IOnru2lDPe9KRRyvCXw6Y5H415vbBLRm8+q6fmLUU7DfO6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="flex flex-col min-h-screen">
+    <nav class="flex justify-between items-center text-white px-2 bg-black w-full h-20">
+      <div class="flex items-center">
+        <a class="px-3 text-xl"><a href="/">Task Manager</a></a>
+      </div>
+      
+      <% if logged_in? %>
+        <%= form_with url: sessions_path , method: :delete  do |f| %>   
+          <button class="sm:hidden md:flex px-3 hover:text-gray-500 hover:underline" type="submit">
+                <%= @user.username %><i class="ri-logout-box-r-line"></i>          
+          </button>
+          <% end %>   
+      <% else %>
+          <a href="/login"class="sm:hidden md:flex px-3 hover:text-gray-500 hover:underline">Login  <i class="ri-user-line"> </i></a>
+          <a href="/login"class=" md:hidden sm:flex px-3 hover:text-gray-500 hover:underline"><i class="ri-user-line"> </i></i></a>
+      <% end %>
+    </nav>
+    <main class="flex-grow">
+      <%= yield %>
+    </main>
+    <footer class=" flex justify-between items-center h-20 w-full bg-black text-white static bottom-0">
+      <p class="text-md hover:text-gray-500 px-4 ">Contact us</p>
+      <p class="text-md px-4">copyright © 2025 all rights reserved</p>
+    </footer>
+  </body>
+</html>
