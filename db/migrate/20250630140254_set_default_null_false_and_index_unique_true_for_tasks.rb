@@ -6,7 +6,7 @@ class SetDefaultNullFalseAndIndexUniqueTrueForTasks < ActiveRecord::Migration[7.
     
     #title formatter
     generate_from="MessiA"
-      Task.where(title: nil).each do |task|
+    Task.where(title: nil).each do |task|
       generate_from= generate_from + "23"
       task.title = generate_from
       task.save

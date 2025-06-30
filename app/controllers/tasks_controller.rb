@@ -1,8 +1,7 @@
 class TasksController < ApplicationController
-
+  before_action :verify_authentication
   #create task
   def create
-    authorized(set_user)
     @task= @user.tasks.build(create_task_params)
     if @task.save
       flash[:success]= "create tasks successfully"
@@ -14,14 +13,12 @@ class TasksController < ApplicationController
 
   #edit task
   def edit
-    authorized(set_user)
     @task= Task.find(params[:id])
   end
 
   #update
 
   def update
-    authorized(set_user)
     @task= Task.find(params[:id])
     if @task.update(update_task_params)
       flash[:success]= "successfully updated"
@@ -32,7 +29,6 @@ class TasksController < ApplicationController
   end
   #Delete Task
   def destroy
-    authorized(set_user)
     @task= Task.find(params[:id])
     if @task.destroy
       flash[:success]= "Task deleted !"
@@ -49,10 +45,14 @@ class TasksController < ApplicationController
 
   def create_task_params
     params[:status]= "pending"
-    params.permit(:title,:description)
+    params.permit(:title, :description)
   end
 
   def update_task_params
     params.require(:task).permit(:title,:description,:status)
+  end
+
+  def verify_authentication
+    user_authorized?(set_user)
   end
 end

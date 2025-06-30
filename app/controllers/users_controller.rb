@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   #Show a user
   def show
     @user= User.find(params[:id])
-    authorized(@user)
+    user_authorized?(@user)
     @tasks= @user.tasks
   end
   private
