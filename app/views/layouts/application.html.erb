@@ -22,7 +22,7 @@
       <% if logged_in? %>
         <%= form_with url: sessions_path , method: :delete  do |f| %>   
           <button class="sm:hidden md:flex px-3 hover:text-gray-500 hover:underline" type="submit">
-                <%= @user.username %><i class="ri-logout-box-r-line"></i>          
+                <%= current_user.username %><i class="ri-logout-box-r-line"></i>          
           </button>
           <% end %>   
       <% else %>

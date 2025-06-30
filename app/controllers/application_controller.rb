@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
     current_user
   end
 
-  def authorized
-    redirect_to login_path unless logged_in?
+  def authorized(user)
+    redirect_to login_path unless current_user == user
   end
 end
 

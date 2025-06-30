@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :authorized, only: [:show]
 
   # Create a New User
   def create
@@ -15,6 +14,7 @@ class UsersController < ApplicationController
   #Show a user
   def show
     @user= User.find(params[:id])
+    authorized(@user)
     @tasks= @user.tasks
   end
   private
@@ -23,5 +23,5 @@ class UsersController < ApplicationController
     params.permit(:username,:password)
   end
 
- 
+
 end
