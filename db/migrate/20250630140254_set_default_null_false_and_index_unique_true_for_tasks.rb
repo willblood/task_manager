@@ -1,5 +1,9 @@
 class SetDefaultNullFalseAndIndexUniqueTrueForTasks < ActiveRecord::Migration[7.1]
   def change
+    #Delete Task with user_id nill
+    Task.where(user_id:nil).each { |task|  task.destroy  }
+    change_column_null :tasks , :user_id, false
+    
     #title formatter
     generate_from="MessiA"
       Task.where(title: nil).each do |task|
@@ -21,10 +25,6 @@ class SetDefaultNullFalseAndIndexUniqueTrueForTasks < ActiveRecord::Migration[7.
     end
     change_column_null :tasks , :description, false
     # end description formatter
-
-    #Delete Task with user_id nill
-    Task.where(user_id:nil).each { |task|  task.destroy  }
-    change_column_null :tasks , :user_id, false
 
   end
 end
