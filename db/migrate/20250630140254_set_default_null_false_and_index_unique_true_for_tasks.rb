@@ -5,6 +5,7 @@ class SetDefaultNullFalseAndIndexUniqueTrueForTasks < ActiveRecord::Migration[7.
       Task.where(title: nil).each do |task|
       generate_from= generate_from + "23"
       task.title = generate_from
+      task.save
     end
     change_column_null :tasks , :title, false   
     add_index :tasks, :title, unique: true
@@ -16,6 +17,7 @@ class SetDefaultNullFalseAndIndexUniqueTrueForTasks < ActiveRecord::Migration[7.
     Task.where(description: nil).each do |task|
       generate_from= generate_from + "23"
       task.description= generate_from
+      task.save
     end
     change_column_null :tasks , :description, false
     # end description formatter

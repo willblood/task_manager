@@ -5,6 +5,7 @@ class SetDefaultNullFalseAndIndexUniqueTrueForUsers < ActiveRecord::Migration[7.
     User.where(username: nil).each do |user|
       generate_from= generate_from + "23"
       user.username= generate_from
+      user.save
     end
     change_column_null :users , :username, false
     add_index :users, :username, unique: true
@@ -16,6 +17,7 @@ class SetDefaultNullFalseAndIndexUniqueTrueForUsers < ActiveRecord::Migration[7.
     User.where(password_digest: nil).each do |user|
       generate_from= generate_from + "23"
       user.password= generate_from
+      user.save
     end
     change_column_null :users , :password_digest, false
     # end password formatter
